@@ -3,7 +3,7 @@
 alab-mart is an AI-focused e-commerce platform built to demonstrate two practical AI applications inside one product experience:
 
 - RAG product assistant: a retrieval-augmented chat experience for questions about products, store policies, and recommendations.
-- Voice shopping assistant: a live cart assistant that accepts typed or spoken commands and updates the shopping cart in real time.
+- Voice shopping assistant: a live cart assistant that accepts spoken commands and updates the shopping cart in real time.
 
 The project combines a FastAPI backend, a browser storefront, a local RAG pipeline, and a voice workflow powered by Whisper.cpp and gTTS.
 
@@ -68,9 +68,9 @@ git clone https://github.com/ggerganov/whisper.cpp.git whisper.cpp
 Recommended local layout after setup:
 
 ```text
-d:\alab\whisper.cpp\
-d:\alab\whisper.cpp\build\bin\Release\whisper-cli.exe
-d:\alab\whisper.cpp\models\ggml-base.en.bin
+alab-mart\whisper.cpp\
+alab-mart\whisper.cpp\build\bin\Release\whisper-cli.exe
+alab-mart\whisper.cpp\models\ggml-base.en.bin
 ```
 
 Download a Whisper model from the Whisper.cpp releases or model download scripts, then store it inside `whisper.cpp/models/` or another local path of your choice. If you keep the binary or model somewhere else, point the backend to it with environment variables before starting the server:
@@ -120,7 +120,7 @@ The Alab widget in the storefront supports typed or spoken shopping commands suc
 ## Demo flow
 
 1. Start the backend.
-2. Open the storefront and add a few products to the cart.
+2. Open the storefront and add a few products to the cart using voice prompt.
 3. Open `llm.html` to ask product or policy questions.
 4. Use the Alab widget to test typed or spoken shopping commands.
 

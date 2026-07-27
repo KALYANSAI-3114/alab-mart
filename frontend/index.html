@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alabmart | AI E-Commerce Store</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">Alabmart</div>
+
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search AI books, hardware, assistants..." onkeyup="handleSearch()">
+    </div>
+
+    <a href="llm.html" class="ai-assistant-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+      </svg>
+      Ask RAG Assistant
+    </a>
+
+    <div class="profile-container">
+      <button class="profile-btn" onclick="toggleCartModal()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span id="cartCount">0</span>
+      </button>
+
+      <div id="authStatus" class="auth-status">
+        <button onclick="toggleAuthModal(true)">Login</button>
+      </div>
+
+      <div class="profile-icon" onclick="toggleAuthModal(true)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <aside class="sidebar">
+      <h3>Categories</h3>
+      <ul class="category-list">
+        <li class="category-item active" onclick="selectCategory('books', this)">AI Books</li>
+        <li class="category-item" onclick="selectCategory('hardware', this)">AI Hardware Devices</li>
+        <li class="category-item" onclick="selectCategory('assistants', this)">AI Smart Assistants</li>
+      </ul>
+
+      <div class="sale-banner">
+        <strong>Special Sale Dates:</strong><br>
+        09-09 | 26-11 | 03-11
+      </div>
+    </aside>
+
+    <main class="content-area">
+      <div class="category-header">
+        <h2 id="categoryTitle">AI Books</h2>
+        <span class="item-count" id="itemCount">Showing 10 Items</span>
+      </div>
+
+      <div class="product-grid" id="productGrid"></div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-col">
+        <h4>About Alabmart</h4>
+        <p>An online e-commerce platform dedicated exclusively to Artificial Intelligence products. Founded by A. Kalyan Sai.</p>
+        <p><strong>Head Office:</strong> Guntur, Andhra Pradesh, India</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Delivery & Return Policy</h4>
+        <p>Fast Pan-India delivery within 2 business days.</p>
+        <p>Easy 7-day return policy for unused products.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <p><strong>Website Queries:</strong> 1234567890 | ecommerce@alab-mart.com</p>
+        <p><strong>Product Queries:</strong> 9876543210 | product@alab-mart.com</p>
+        <p><strong>Support:</strong> Mon-Fri (9:00 AM - 8:00 PM IST)</p>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Alabmart. All rights reserved.</div>
+  </footer>
+
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="toggleCartModal(false)">&times;</span>
+      <h3>Your Shopping Cart</h3>
+      <div id="cartItemsContainer"></div>
+      <div class="cart-summary">
+        <h4>Total: Rs.<span id="cartTotal">0</span></h4>
+        <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="authModal" class="modal">
+    <div class="modal-content auth-modal">
+      <span class="close-btn" onclick="toggleAuthModal(false)">&times;</span>
+      <h3>Account</h3>
+      <div class="auth-grid">
+        <form onsubmit="handleAuth(event, 'login')">
+          <h4>Login</h4>
+          <input name="email" type="email" placeholder="Email" required>
+          <input name="password" type="password" placeholder="Password" required>
+          <button class="checkout-btn" type="submit">Login</button>
+        </form>
+        <form onsubmit="handleAuth(event, 'register')">
+          <h4>Register</h4>
+          <input name="email" type="email" placeholder="Email" required>
+          <input name="password" type="password" placeholder="Password" minlength="6" required>
+          <input name="confirmPassword" type="password" placeholder="Retype password" minlength="6" required>
+          <button class="checkout-btn" type="submit">Create Account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="checkoutModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="toggleCheckoutModal(false)">&times;</span>
+      <h3>Bill & Payment</h3>
+      <form onsubmit="placeOrder(event)">
+        <div id="checkoutItems" class="checkout-items"></div>
+        <div class="checkout-total">Total: Rs.<span id="checkoutTotal">0</span></div>
+        <label class="payment-option">
+          <input type="radio" name="paymentMethod" value="Demo UPI payment" checked>
+          Demo UPI payment
+        </label>
+        <label class="payment-option">
+          <input type="radio" name="paymentMethod" value="Cash on delivery">
+          Cash on delivery
+        </label>
+        <button class="checkout-btn full-width" type="submit">Pay & Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <section class="alab-widget" id="alabWidget" aria-label="Alab voice shopping assistant">
+    <button class="alab-launcher" id="alabLauncher" type="button" onclick="toggleAlabWidget()">
+      <span class="alab-launcher-mark">🤖</span>
+      <span>Alab</span>
+    </button>
+
+    <div class="alab-panel" id="alabPanel">
+      <div class="alab-header">
+        <div>
+          <strong>Alab</strong>
+          <span>Voice shopping assistant</span>
+        </div>
+        <button type="button" onclick="toggleAlabWidget(false)" title="Close">&times;</button>
+      </div>
+
+      <div class="alab-controls">
+        <button id="voiceBtn" class="alab-mic-btn" type="button" title="Talk to Alab">
+    🎤
+    <span>Tap to Talk</span>
+</button>
+      </div>
+      <p id="voiceStatus" class="alab-status">Ready</p>
+    </div>
+  </section>
+
+  <script src="js/voice/api.js"></script>
+  <script src="js/voice/speech.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/voice/widget.js"></script>
+</body>
+</html>

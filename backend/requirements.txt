@@ -1,0 +1,6 @@
+fastapi
+gtts 
+uvicorn 
+pydantic
+email-validator
+python-multipart

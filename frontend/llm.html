@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alabmart Assistant | RAG Chat</title>
+  <link rel="stylesheet" href="css/llm.css">
+</head>
+<body>
+
+  <div class="chat-app">
+    <!-- LEFT SIDEBAR: CHAT HISTORY -->
+    <aside class="chat-sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <button class="new-chat-btn" onclick="startNewChat()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          New Chat
+        </button>
+      </div>
+
+      <div class="chat-history">
+        <div class="history-label">Recent Conversations</div>
+        <ul id="historyList">
+          <li class="history-item active">Alabmart Store Assistant</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="index.html" class="back-store-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Back to Store
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN CHAT INTERFACE AREA -->
+    <main class="chat-main">
+      
+      <!-- TOP HEADER -->
+      <header class="chat-topbar">
+        <div class="model-selector">
+          <span class="model-name">Alabmart RAG Assistant</span>
+          <span class="model-badge">RAG v1.0</span>
+        </div>
+      </header>
+
+      <!-- MESSAGES DISPLAY CONTAINER -->
+      <div class="messages-container" id="messagesContainer">
+        <!-- Default Welcome Message -->
+        <div class="message assistant-message">
+          <div class="avatar ai-avatar">AI</div>
+          <div class="message-content">
+            <p>Hello! I am your <strong>Alabmart AI Assistant</strong> powered by RAG.</p>
+            <p>How can I help you today? You can ask me about product specifications, return policies, delivery timelines, or product recommendations across AI Books, Hardware, and Smart Assistants.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- INPUT BAR AREA -->
+      <div class="input-container">
+        <form id="chatForm" onsubmit="sendMessage(event)">
+          <div class="input-box">
+            <textarea 
+              id="userInput" 
+              placeholder="Ask anything about Alabmart products or policies..." 
+              rows="1" 
+              onkeydown="handleKeyDown(event)"></textarea>
+            
+            <button type="submit" id="sendBtn" class="send-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </div>
+        </form>
+        <div class="input-footer">
+          Alabmart RAG Assistant can make mistakes. Verify important product details.
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/llm.js"></script>
+</body>
+</html>

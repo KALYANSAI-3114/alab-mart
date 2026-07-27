@@ -1,0 +1,9 @@
+langchain
+langchain-core
+langchain-community
+langchain-huggingface
+sentence-transformers
+langchain-ollama
+pypdf
+langchain-chroma
+bm25

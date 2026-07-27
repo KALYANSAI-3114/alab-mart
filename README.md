@@ -1,6 +1,6 @@
-# Alabmart
+# alab-mart
 
-Alabmart is an AI-focused e-commerce platform built to demonstrate two practical AI applications inside one product experience:
+alab-mart is an AI-focused e-commerce platform built to demonstrate two practical AI applications inside one product experience:
 
 - RAG product assistant: a retrieval-augmented chat experience for questions about products, store policies, and recommendations.
 - Voice shopping assistant: a live cart assistant that accepts typed or spoken commands and updates the shopping cart in real time.
